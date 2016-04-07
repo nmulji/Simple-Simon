@@ -22,40 +22,55 @@
 
 <body>
 
-    <h1>Play Simple Simon</h1>
+    <div class="container-fluid">
 
-    <div class="col-sm-12 col-md-12 col-lg-12" id="ss_containers">
+        <div class="row text-center">
 
-        <div class="col-sm-12 col-md-12 col-lg-12" id="ss_container_top">
-
-            <div data-number = "1" class="simon_shape" id="simon_shape_1"></div>
-
-            <div data-number = "2" class="simon_shape" id="simon_shape_2"></div>
+            <h1>Play Simple Simon</h1>
 
         </div>
 
+        <div class="row text-center">
 
-        <div class="col-sm-12 col-md-12 col-lg-12" id="ss_container_bottom">
+            <div class="col-sm-12 col-md-12 col-lg-12" id="ss_containers">
 
-            <div data-number = "3" class="simon_shape" id="simon_shape_3"></div>
+                <div class="col-sm-12 col-md-12 col-lg-12" id="ss_container_top">
 
-            <div data-number = "4" class="simon_shape" id="simon_shape_4"></div>
+                    <div data-number = "1" class="simon_shape" id="simon_shape_1"></div>
+
+                    <div data-number = "2" class="simon_shape" id="simon_shape_2"></div>
+
+                </div>
+
+
+                <div class="col-sm-12 col-md-12 col-lg-12" id="ss_container_bottom">
+
+                    <div data-number = "3" class="simon_shape" id="simon_shape_3"></div>
+
+                    <div data-number = "4" class="simon_shape" id="simon_shape_4"></div>
+
+                </div>
+
+            </div>
 
         </div>
 
-    <div>
+    </div>
 
     <script>
     "use strict";
 
-    var random = Math.floor(Math.random()*4)
-
-    $(document).ready(function() {
-        $("h1").click(function() {
-            $(".simon_shape").eq(random).fadeOut();
-        })
-    });
-    
+        $(document).ready(function() {
+            $("h1").click(function() {
+                var random = Math.floor(Math.random()*4)
+                $(".simon_shape").eq(random).animate({
+                    opacity: "0"
+                });
+                $(".simon_shape").eq(random).animate({
+                    opacity: "1"
+                });
+            });
+        });
 
     </script>
 
