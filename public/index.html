@@ -62,7 +62,7 @@
 
         $(document).ready(function() {
             $("h1").click(function() {
-                setInterval(function(){
+                var ss_interval = setInterval(function(){
                     var random = Math.floor(Math.random()*4)
                     console.log(random);
                     $(".simon_shape").eq(random).animate({
@@ -71,7 +71,11 @@
                     $(".simon_shape").eq(random).animate({
                         opacity: "1"
                     }, 750);                   
-                }, 3000); //NEED TO STOP INTERVAL!!!
+                }, 3000);
+
+                setTimeout(function() {
+                    clearInterval(ss_interval);
+                }, 15000);
             });
         });
 
