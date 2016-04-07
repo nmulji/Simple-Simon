@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Simon</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!--Google Fonts -->
+
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/simple_simon.css">
+
+    <!-- I moved my JQuery up here because it said $ wasn't defined, when I left it with bootstrap down at the bottom -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <h1>Play Simple Simon</h1>
+
+    <div class="col-sm-12 col-md-12 col-lg-12" id="ss_containers">
+
+        <div class="col-sm-12 col-md-12 col-lg-12" id="ss_container_top">
+
+            <div data-number = "1" class="simon_shape" id="simon_shape_1"></div>
+
+            <div data-number = "2" class="simon_shape" id="simon_shape_2"></div>
+
+        </div>
+
+
+        <div class="col-sm-12 col-md-12 col-lg-12" id="ss_container_bottom">
+
+            <div data-number = "3" class="simon_shape" id="simon_shape_3"></div>
+
+            <div data-number = "4" class="simon_shape" id="simon_shape_4"></div>
+
+        </div>
+
+    <div>
+
+    <script>
+    "use strict";
+
+    var random = Math.floor(Math.random()*4)
+
+    $(document).ready(function() {
+        $("h1").click(function() {
+            $(".simon_shape").eq(random).fadeOut();
+        })
+    });
+    
+
+    </script>
+
+
+
+<!-- Latest compiled and minified JavaScript/JQuery -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</body>
+</html>
