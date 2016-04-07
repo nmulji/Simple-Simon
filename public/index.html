@@ -60,22 +60,33 @@
     <script>
     "use strict";
 
+        var mouse_click = $(".simon_shape");
+
+        var sequence = [];  
+
+        var clickIndex = 0;                
+
         $(document).ready(function() {
             $("h1").click(function() {
                 var ss_interval = setInterval(function(){
                     var random = Math.floor(Math.random()*4)
                     console.log(random);
+                    sequence.push(random);
+                    console.log(sequence);
+
+                    //pass in the animate as a variable within the function
                     $(".simon_shape").eq(random).animate({
                         opacity: "0"
                     }, 750);
                     $(".simon_shape").eq(random).animate({
                         opacity: "1"
-                    }, 750);                   
-                }, 3000);
+                    }, 750);   
+
+                }, 2000);
 
                 setTimeout(function() {
                     clearInterval(ss_interval);
-                }, 15000);
+                }, 10000);
             });
         });
 
@@ -83,10 +94,30 @@
         //user play function
 
         var user_play = function (event) {
-            console.log($(this).data("number"));
+            var simon_shape = $(this).data("number");
+            console.log(simon_shape);
+
+                    if (simon_shape ==  sequence[clickIndex]) {
+                        clickIndex++;
+                    
+
+                        if (clickIndex == sequence.length) {
+                            console.log("Winner!");
+                            alert("Winner!");
+                            clickIndex = 0;
+                            location.reload(true);
+                        }
+                    } else {
+                        console.log("Loser!");
+                        alert("Loser!");
+                        clickIndex = 0;
+                        location.reload(true);
+                    }
         };
 
+        //event listener is "on" since Jquery is being used
         $(".simon_shape").on("click", user_play);
+
 
     </script>
 
