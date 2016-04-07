@@ -1,0 +1,21 @@
+.simon_shape {
+	height: 10em;
+	width: 10em;
+	display: inline-block;
+}
+
+#simon_shape_1 {
+	background-color: #b10026;
+}
+
+#simon_shape_2 {
+	background-color: #e31a1c;
+}
+
+#simon_shape_3 {
+	background-color: #fc4e2a;
+}
+
+#simon_shape_4 {
+	background-color: #fd8d3c;
+}
