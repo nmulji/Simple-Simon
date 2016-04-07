@@ -2,6 +2,12 @@
 	height: 10em;
 	width: 10em;
 	display: inline-block;
+	font-size: 1em;
+	color: white;
+}
+
+button.simon_shape:focus {
+	outline: 0;
 }
 
 #simon_shape_1 {

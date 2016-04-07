@@ -36,18 +36,18 @@
 
                 <div class="col-sm-12 col-md-12 col-lg-12" id="ss_container_top">
 
-                    <div data-number = "1" class="simon_shape" id="simon_shape_1"></div>
+                    <button data-number = "0" class="simon_shape" id="simon_shape_1">0</button>
 
-                    <div data-number = "2" class="simon_shape" id="simon_shape_2"></div>
+                    <button data-number = "1" class="simon_shape" id="simon_shape_2">1</button>
 
                 </div>
 
 
                 <div class="col-sm-12 col-md-12 col-lg-12" id="ss_container_bottom">
 
-                    <div data-number = "3" class="simon_shape" id="simon_shape_3"></div>
+                    <button data-number = "2" class="simon_shape" id="simon_shape_3">2</button>
 
-                    <div data-number = "4" class="simon_shape" id="simon_shape_4"></div>
+                    <button data-number = "3" class="simon_shape" id="simon_shape_4">3</button>
 
                 </div>
 
@@ -62,15 +62,27 @@
 
         $(document).ready(function() {
             $("h1").click(function() {
-                var random = Math.floor(Math.random()*4)
-                $(".simon_shape").eq(random).animate({
-                    opacity: "0"
-                });
-                $(".simon_shape").eq(random).animate({
-                    opacity: "1"
-                });
+                setInterval(function(){
+                    var random = Math.floor(Math.random()*4)
+                    console.log(random);
+                    $(".simon_shape").eq(random).animate({
+                        opacity: "0"
+                    }, 750);
+                    $(".simon_shape").eq(random).animate({
+                        opacity: "1"
+                    }, 750);                   
+                }, 3000); //NEED TO STOP INTERVAL!!!
             });
         });
+
+
+        //user play function
+
+        var user_play = function (event) {
+            console.log($(this).data("number"));
+        };
+
+        $(".simon_shape").on("click", user_play);
 
     </script>
 
