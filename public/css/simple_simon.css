@@ -1,13 +1,23 @@
 .simon_shape {
+	display: inline-block;
+	border-radius: 50%;
+	box-shadow: 0 0 3px gray;
+	text-align: center;
+	border: 5px solid black;
 	height: 10em;
 	width: 10em;
-	display: inline-block;
 	font-size: 1em;
 	color: white;
+
 }
 
 button.simon_shape:focus {
-	outline: 0;
+	outline: 0px;
+}
+
+button.simon_shape:hover {
+	opacity: 5;
+	outline: 0px;
 }
 
 #simon_shape_1 {
@@ -25,3 +35,6 @@ button.simon_shape:focus {
 #simon_shape_4 {
 	background-color: #fd8d3c;
 }
+
+
+
