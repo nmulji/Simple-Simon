@@ -26,7 +26,7 @@
 
         <div class="row text-center">
 
-            <h1>Play Simple Simon</h1>
+            <h1></h1>
 
         </div>
 
@@ -39,6 +39,12 @@
                     <button data-number = "0" class="simon_shape" id="simon_shape_1"></button>
 
                     <button data-number = "1" class="simon_shape" id="simon_shape_2"></button>
+
+                </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+
+                    <button id="play_button">PLAY</button>
 
                 </div>
 
@@ -60,63 +66,105 @@
     <script>
     "use strict";
 
-        var mouse_click = $(".simon_shape");
+        var simon_shape = $(".simon_shape");
 
-        var sequence = [];  
+        var play_button = $("#play_button");  
 
-        var clickIndex = 0;                
+        var simon_sequence = [];
 
+        var user_sequence = [];  
+
+        var clickIndex = 0;  
+
+        //start function
         $(document).ready(function() {
-            $("h1").click(function() {
-                var ss_interval = setInterval(function(){
-                    var random = Math.floor(Math.random()*4)
-                    console.log(random);
-                    sequence.push(random);
-                    console.log(sequence);
-
-                    //pass in the animate as a variable within the function
-                    $(".simon_shape").eq(random).animate({
-                        opacity: "0"
-                    }, 750);
-                    $(".simon_shape").eq(random).animate({
-                        opacity: "1"
-                    }, 750);   
-
-                }, 2000);
-
-                setTimeout(function() {
-                    clearInterval(ss_interval);
-                }, 10000);
+            play_button.click(function() {
+                simon_sequence = [];
+                simonMove();
             });
         });
 
+        console.log(simon_sequence);
 
-        //user play function
+        function simonMove() {
+            user_sequence = [];
+            addRandomNumberToSequence();
+            ss_interval();
+            $("h1").append("Your Turn!");
+        }
 
-        var user_play = function (event) {
-            var simon_shape = $(this).data("number");
-            console.log(simon_shape);
+        //random number function
 
-                    if (simon_shape ==  sequence[clickIndex]) {
-                        clickIndex++;
-                    
+        function addRandomNumberToSequence() {
+            var random = Math.floor(Math.random() * 4);
+            simon_sequence.push(simon_shape[random].id);
+            console.log(simon_sequence);
+        }
 
-                        if (clickIndex == sequence.length) {
-                            console.log("Winner!");
-                            alert("Winner!");
-                            clickIndex = 0;
-                            location.reload(true);
-                        }
-                    } else {
-                        console.log("Loser!");
-                        alert("Loser!");
-                        clickIndex = 0;
-                        location.reload(true);
-                    }
+        //clear interval, count and add to round
+
+        function ss_interval() {
+            var i = 0;
+
+            var intervalId = setInterval(function () {
+
+                simonSelect($(simon_sequence[i]));
+
+                i++;
+
+                //interval checker
+                if (i >= simon_sequence.length) {
+                    clearInterval(intervalId);
+                } 
+            }, 2000)
+        }
+
+
+        //animate
+         function simonSelect(element) {
+            simon_shape.animate({
+                opacity: "0"
+            }, 1500);;
+            simon_shape.animate({
+                opacity: "1"
+            }, 1500); 
+
+        }
+
+
+        //compare user & simon
+
+        function compareSequences() {
+            var sequenceError = false;
+            for (var i = 0; i < user_sequence.length; i++) {
+                if (simon_sequence[i] == undefined || simon_sequence[i] != user_sequence[i]) {
+                    sequenceError = true;
+                    break;
+                }
+            }
+
+            if(sequenceError) {
+                alert("Loser!");
+                location.reload(true);
+            } else if (user_sequence.length == simon_sequence.length) {
+                simonMove();
+            }
         };
 
+
+
+        //user click function
+
+        function userClick() {
+            var simon_shape_number = $(this).data("number");
+            user_sequence.push(simon_shape_number);
+            compareSequences();
+        }
+
+
+
         //event listener is "on" since Jquery is being used
-        $(".simon_shape").on("click", user_play);
+        $(".simon_shape").on("click", userClick);
 
 
     </script>
