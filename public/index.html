@@ -36,24 +36,26 @@
 
                 <div class="col-sm-12 col-md-12 col-lg-12" id="ss_container_top">
 
-                    <button data-number = "0" class="simon_shape" id="simon_shape_1"></button>
+                    <button data-number = "0" class="simon_shape" id="simon_shape_red"></button>
 
-                    <button data-number = "1" class="simon_shape" id="simon_shape_2"></button>
+                    <button data-number = "1" class="simon_shape" id="simon_shape_yellow"></button>
 
                 </div>
 
                     <div class="col-sm-12 col-md-12 col-lg-12">
 
-                    <button id="play_button">PLAY</button>
+                    <button id="play_button" class="menu_button">PLAY</button>
+                    <button id="round_button" class="menu_button">ROUND: 0</button>
+                    <button id="mode_button" class="menu_button">MODE</button>
 
                 </div>
 
 
                 <div class="col-sm-12 col-md-12 col-lg-12" id="ss_container_bottom">
 
-                    <button data-number = "2" class="simon_shape" id="simon_shape_3"></button>
+                    <button data-number = "2" class="simon_shape" id="simon_shape_green"></button>
 
-                    <button data-number = "3" class="simon_shape" id="simon_shape_4"></button>
+                    <button data-number = "3" class="simon_shape" id="simon_shape_blue"></button>
 
                 </div>
 
@@ -90,7 +92,7 @@
             user_sequence = [];
             addRandomNumberToSequence();
             ss_interval();
-            $("h1").append("Your Turn!");
+            $("h1").innerText = "Your Turn!";
         }
 
         //random number function
@@ -104,6 +106,13 @@
         //clear interval, count and add to round
 
         function ss_interval() {
+
+            disableClick();
+
+            console.log($("#round_button").html());
+
+            $("#round_button").innerHTML = ("Round: " + simon_sequence.length);
+
             var i = 0;
 
             var intervalId = setInterval(function () {
@@ -115,6 +124,7 @@
                 //interval checker
                 if (i >= simon_sequence.length) {
                     clearInterval(intervalId);
+                    enableClick();
                 } 
             }, 2000)
         }
@@ -156,15 +166,19 @@
         //user click function
 
         function userClick() {
-            var simon_shape_number = $(this).data("number");
+            var simon_shape_number = this.id;
             user_sequence.push(simon_shape_number);
             compareSequences();
         }
 
 
+        function enableClick() {
+            $(".simon_shape").on("click", userClick);
+        }
 
-        //event listener is "on" since Jquery is being used
-        $(".simon_shape").on("click", userClick);
+        function disableClick() {
+            $(".simon_shape").off("click", userClick);
+        }
 
 
     </script>
